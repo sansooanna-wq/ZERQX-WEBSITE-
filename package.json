@@ -1,0 +1,13 @@
+
+{
+  "name": "zerqx-obfuscator-v3",
+  "version": "1.0.0",
+  "description": "ZERQX V3 backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

@@ -15,7 +15,7 @@
 
 :root {
   --gold: #d6ad52;
-  --gold-light: #f3d78b;
+  --light: #f3d78b;
   --bg: #090909;
   --panel: #121212;
   --border: #292316;
@@ -24,7 +24,7 @@
 
 body {
   background: var(--bg);
-  color: #fff;
+  color: white;
   font-family: Arial, sans-serif;
   min-height: 100vh;
 }
@@ -35,21 +35,21 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--border);
   background: #0c0c0c;
+  border-bottom: 1px solid var(--border);
 }
 
 .logo {
-  color: var(--gold-light);
-  font-size: 23px;
+  color: var(--light);
+  font-size: 24px;
   font-weight: 900;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
 }
 
 .version {
   color: var(--gold);
   border: 1px solid #6d5526;
-  padding: 7px 12px;
+  padding: 8px 13px;
   border-radius: 20px;
   font-size: 11px;
 }
@@ -83,7 +83,7 @@ header {
 
 .nav.active {
   background: #241d0e;
-  color: var(--gold-light);
+  color: var(--light);
   border: 1px solid #59451e;
 }
 
@@ -97,7 +97,7 @@ main {
 
 .hero {
   padding: 28px;
-  background: linear-gradient(120deg, #211a0c, #111);
+  background: linear-gradient(120deg,#211a0c,#111);
   border: 1px solid #59451e;
   border-radius: 14px;
   margin-bottom: 28px;
@@ -105,14 +105,14 @@ main {
 
 .hero h1 {
   font-size: 29px;
-  color: var(--gold-light);
+  color: var(--light);
   margin-bottom: 10px;
 }
 
 .hero p {
   color: #aaa;
   font-size: 13px;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .status {
@@ -121,20 +121,14 @@ main {
   color: #8bd6a1;
   font-size: 11px;
   background: #102116;
-  padding: 7px 12px;
+  padding: 8px 12px;
   border-radius: 20px;
 }
 
 .section-title {
   font-size: 16px;
   margin-bottom: 15px;
-  color: var(--gold-light);
-}
-
-.editor-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
+  color: var(--light);
 }
 
 .panel {
@@ -142,6 +136,7 @@ main {
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
+  margin-bottom: 18px;
 }
 
 .panel-head {
@@ -157,10 +152,10 @@ main {
   color: var(--gold);
 }
 
-textarea {
+textarea,
+.output {
   width: 100%;
-  min-height: 320px;
-  resize: vertical;
+  min-height: 280px;
   padding: 18px;
   background: #0b0b0b;
   color: #e8d39d;
@@ -169,24 +164,20 @@ textarea {
   font-family: monospace;
   font-size: 13px;
   line-height: 1.7;
+  resize: vertical;
 }
 
-#result {
-  min-height: 320px;
-  padding: 18px;
+.output {
   color: #c9c9c9;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
-  font-family: monospace;
-  font-size: 13px;
-  line-height: 1.7;
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 20px;
+  margin: 20px 0;
 }
 
 button {
@@ -194,7 +185,7 @@ button {
   border-radius: 8px;
   border: 1px solid #705522;
   background: #211a0c;
-  color: var(--gold-light);
+  color: var(--light);
   font-weight: bold;
   cursor: pointer;
   transition: .2s;
@@ -206,7 +197,7 @@ button:hover {
 }
 
 button.primary {
-  background: linear-gradient(120deg, #d6ad52, #9c7429);
+  background: linear-gradient(120deg,#d6ad52,#9c7429);
   color: #111;
   border: none;
 }
@@ -218,7 +209,7 @@ button:disabled {
 
 .info-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3,1fr);
   gap: 12px;
   margin-top: 25px;
 }
@@ -231,14 +222,27 @@ button:disabled {
 }
 
 .info strong {
-  color: var(--gold-light);
-  font-size: 19px;
+  color: var(--light);
+  font-size: 18px;
 }
 
 .info p {
   color: var(--muted);
   font-size: 11px;
   margin-top: 7px;
+}
+
+.notice {
+  color: #c9b47c;
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 12px 0;
+}
+
+#message {
+  color: #aaa;
+  font-size: 12px;
+  margin: 12px 0;
 }
 
 footer {
@@ -248,17 +252,13 @@ footer {
   padding: 30px 10px;
 }
 
-@media(max-width: 800px) {
+@media(max-width:800px) {
   .sidebar {
     display: none;
   }
 
   main {
     padding: 20px 14px;
-  }
-
-  .editor-grid {
-    grid-template-columns: 1fr;
   }
 
   .hero h1 {
@@ -285,115 +285,149 @@ footer {
 
 <div class="layout">
 
-  <aside class="sidebar">
-    <div class="side-title">WORKSPACE</div>
-    <div class="nav active">⌘ Dashboard</div>
-    <div class="nav">◇ Source Analyzer</div>
+<aside class="sidebar">
+  <div class="side-title">WORKSPACE</div>
+  <div class="nav active">⌘ Dashboard</div>
+  <div class="nav">◇ Source Analyzer</div>
 
-    <div class="side-title">INFORMATION</div>
-    <div class="nav">◇ About ZERQX</div>
-    <div class="nav">◇ Version 3.0.0</div>
-  </aside>
+  <div class="side-title">INFORMATION</div>
+  <div class="nav">◇ About ZERQX</div>
+  <div class="nav">◇ Version 3.0.0</div>
+</aside>
 
-  <main>
+<main>
 
-    <section class="hero">
-      <h1>ZERQX OBFUSCATOR V3</h1>
-      <p>
-        Welcome to ZERQX. Analyze your Lua and Luau source
-        with a clean, modern workspace.
-      </p>
-      <div class="status">● SYSTEM ONLINE</div>
-    </section>
+<section class="hero">
+  <h1>ZERQX OBFUSCATOR V3</h1>
+  <p>
+    Analyze and process your Lua and Luau source
+    using the ZERQX workspace.
+  </p>
+  <div class="status">● SYSTEM ONLINE</div>
+</section>
 
-    <h2 class="section-title">SOURCE WORKSPACE</h2>
+<h2 class="section-title">SOURCE WORKSPACE</h2>
 
-    <div class="editor-grid">
+<section class="panel">
+  <div class="panel-head">
+    <strong>INPUT SOURCE</strong>
+    <span>LUA / LUAU</span>
+  </div>
 
-      <section class="panel">
-        <div class="panel-head">
-          <strong>INPUT SOURCE</strong>
-          <span>Lua / Luau</span>
-        </div>
+  <textarea id="source"
+    placeholder="-- Paste your Lua source code here..."></textarea>
+</section>
 
-        <textarea id="source"
-          placeholder="-- Paste your Lua source code here..."></textarea>
-      </section>
+<div class="actions">
+  <button class="primary" id="prepareBtn" onclick="prepare()">
+    PREPARE SOURCE
+  </button>
 
-      <section class="panel">
-        <div class="panel-head">
-          <strong>ANALYSIS OUTPUT</strong>
-          <span>RESULT</span>
-        </div>
+  <button id="obfuscateBtn" onclick="obfuscate()">
+    OBFUSCATE
+  </button>
 
-        <div id="result">Your analysis will appear here.</div>
-      </section>
+  <button onclick="clearAll()">CLEAR ALL</button>
+</div>
 
-    </div>
+<p id="message">Ready to process source.</p>
 
-    <div class="actions">
-      <button class="primary" id="prepareBtn" onclick="prepare()">
-        PREPARE SOURCE
-      </button>
+<section class="panel">
+  <div class="panel-head">
+    <strong>ANALYSIS OUTPUT</strong>
+    <span>ANALYZER</span>
+  </div>
 
-      <button onclick="copyOutput()">COPY RESULT</button>
-      <button onclick="clearAll()">CLEAR ALL</button>
-    </div>
+  <div class="output" id="analysisOutput">
+Your analysis will appear here.
+  </div>
+</section>
 
-    <div class="info-grid">
-      <div class="info">
-        <strong>V3.0.0</strong>
-        <p>Current Version</p>
-      </div>
+<section class="panel">
+  <div class="panel-head">
+    <strong>PROCESSED OUTPUT</strong>
+    <span>OUTPUT</span>
+  </div>
 
-      <div class="info">
-        <strong>Lua / Luau</strong>
-        <p>Supported Source</p>
-      </div>
+  <div class="output" id="output">
+Your processed source will appear here.
+  </div>
+</section>
 
-      <div class="info">
-        <strong>ONLINE</strong>
-        <p>Server Status</p>
-      </div>
-    </div>
+<div class="notice">
+  Note: The current backend transformation is a pass-through
+  placeholder. It does not yet perform actual obfuscation.
+</div>
 
-    <footer>
-      ZERQX OBFUSCATOR V3 · BLACK & GOLD EDITION
-    </footer>
+<div class="actions">
+  <button onclick="copyOutput()">COPY OUTPUT</button>
+  <button onclick="downloadOutput()">DOWNLOAD LUA</button>
+</div>
 
-  </main>
+<div class="info-grid">
+  <div class="info">
+    <strong>V3.0.0</strong>
+    <p>Current Version</p>
+  </div>
+
+  <div class="info">
+    <strong>Lua / Luau</strong>
+    <p>Supported Source</p>
+  </div>
+
+  <div class="info">
+    <strong>ONLINE</strong>
+    <p>Server Status</p>
+  </div>
+</div>
+
+<footer>
+  ZERQX OBFUSCATOR V3 · BLACK & GOLD EDITION
+</footer>
+
+</main>
 </div>
 
 <script>
-async function prepare() {
-  const source = document.getElementById("source").value;
-  const result = document.getElementById("result");
-  const button = document.getElementById("prepareBtn");
+const sourceInput = document.getElementById("source");
+const analysisOutput = document.getElementById("analysisOutput");
+const output = document.getElementById("output");
+const message = document.getElementById("message");
+
+async function apiRequest(endpoint) {
+  const source = sourceInput.value;
 
   if (!source.trim()) {
-    result.textContent = "Please enter Lua source first.";
-    return;
+    throw new Error("Please enter Lua source first.");
   }
 
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ source })
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || "Request failed.");
+  }
+
+  return data;
+}
+
+async function prepare() {
+  const button = document.getElementById("prepareBtn");
+
   button.disabled = true;
-  result.textContent = "Analyzing source...";
+  message.textContent = "Analyzing source...";
 
   try {
-    const response = await fetch("/api/analyze", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ source })
-    });
+    const data = await apiRequest("/api/analyze");
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || "Analysis failed.");
-    }
-
-    result.textContent =
+    analysisOutput.textContent =
       "ZERQX ANALYSIS COMPLETE\n\n" +
       "Language: " + data.language + "\n" +
       "Version: " + data.version + "\n" +
@@ -405,33 +439,87 @@ async function prepare() {
       "WARNINGS\n" +
       (data.warnings.length
         ? data.warnings.map(item => "- " + item).join("\n")
-        : "No flagged patterns found.") +
-      "\n\nNote: This is static source analysis, not code obfuscation.";
+        : "No flagged patterns found.");
+
+    message.textContent = "Analysis completed.";
   } catch (error) {
-    result.textContent = "ERROR: " + error.message;
+    analysisOutput.textContent = "ERROR: " + error.message;
+    message.textContent = "Analysis failed.";
   } finally {
     button.disabled = false;
   }
 }
 
-function clearAll() {
-  document.getElementById("source").value = "";
-  document.getElementById("result").textContent =
-    "Your analysis will appear here.";
+async function obfuscate() {
+  const button = document.getElementById("obfuscateBtn");
+
+  button.disabled = true;
+  message.textContent = "Processing source...";
+
+  try {
+    const data = await apiRequest("/api/obfuscate");
+
+    if (typeof data.output !== "string") {
+      throw new Error("Invalid output returned by server.");
+    }
+
+    output.textContent = data.output;
+    message.textContent =
+      "Processing completed. Current backend is pass-through.";
+  } catch (error) {
+    output.textContent = "ERROR: " + error.message;
+    message.textContent = "Processing failed.";
+  } finally {
+    button.disabled = false;
+  }
 }
 
 async function copyOutput() {
-  const text = document.getElementById("result").textContent;
+  const text = output.textContent;
+
+  if (!text || text === "Your processed source will appear here.") {
+    message.textContent = "No output to copy.";
+    return;
+  }
 
   try {
     await navigator.clipboard.writeText(text);
-    alert("Result copied!");
+    message.textContent = "Output copied!";
   } catch (error) {
-    alert("Copy failed. Please copy the result manually.");
+    message.textContent = "Copy failed. Copy manually instead.";
   }
+}
+
+function downloadOutput() {
+  const text = output.textContent;
+
+  if (!text || text === "Your processed source will appear here.") {
+    message.textContent = "No output to download.";
+    return;
+  }
+
+  const blob = new Blob([text], {
+    type: "text/plain;charset=utf-8"
+  });
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = "ZERQX_Output.lua";
+  link.click();
+
+  URL.revokeObjectURL(url);
+  message.textContent = "Download started.";
+}
+
+function clearAll() {
+  sourceInput.value = "";
+  analysisOutput.textContent = "Your analysis will appear here.";
+  output.textContent = "Your processed source will appear here.";
+  message.textContent = "Workspace cleared.";
 }
 </script>
 
 </body>
 </html>
-

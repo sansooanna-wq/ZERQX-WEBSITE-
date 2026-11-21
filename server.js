@@ -1,7 +1,11 @@
 
+
 const express = require("express");
 const path = require("path");
-const { analyzeLua } = require("./obfuscator");
+const {
+  analyzeLua,
+  obfuscateLua
+} = require("./obfuscator");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -31,8 +35,18 @@ app.post("/api/analyze", (req, res) => {
   }
 });
 
+app.post("/api/obfuscate", (req, res) => {
+  try {
+    const result = obfuscateLua(req.body.source);
+    res.json(result);
+  } catch (error) {
+    res.status(400).json({
+      error: error.message
+    });
+  }
+});
+
 app.listen(PORT, () => {
   console.log("ZERQX V3 running on port " + PORT);
 });
-
 
